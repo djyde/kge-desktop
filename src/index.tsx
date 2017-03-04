@@ -3,18 +3,12 @@ import { render } from 'react-dom'
 
 import './style.scss'
 
+import Sidebar from './Sidebar'
+
 export const TitleBar = () => {
   return (
-    <div>
-      Titlebar
-    </div>
-  )
-}
+    <div id='titlebar'>
 
-export const Sidebar = () => {
-  return (
-    <div>
-      Sidebar
     </div>
   )
 }

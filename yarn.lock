@@ -1499,9 +1499,9 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.3.6"
 
-kge@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/kge/-/kge-0.0.2.tgz#60141e209f5a3c91cf6c0ef6f62c8b2c7bfee552"
+kge@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/kge/-/kge-0.0.3.tgz#0518751751537b9b16a486823270579fa0051c2e"
   dependencies:
     axios "^0.15.3"
     cheerio "^0.22.0"

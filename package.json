@@ -9,7 +9,7 @@
   "dependencies": {
     "bulma": "^0.3.2",
     "electron": "^1.6.1",
-    "kge": "^0.0.2",
+    "kge": "^0.0.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },

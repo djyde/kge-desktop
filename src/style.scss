@@ -1,3 +1,5 @@
+$primary: #FA564F;
+
 body {
   display: flex;
 }
@@ -34,6 +36,12 @@ body {
 
 }
 
+#titlebar {
+  background-color: $primary;
+  height: 100%;
+  -webkit-app-region: drag;
+}
+
 
 .f1 {
   flex: 1;
@@ -50,5 +58,9 @@ body {
 .f12 {
   flex: 12;
 }
+
+// custom variables
+
+
 
 @import "~bulma";
