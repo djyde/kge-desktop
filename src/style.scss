@@ -1,0 +1,54 @@
+body {
+  display: flex;
+}
+
+#app {
+  display: flex;
+  flex: 1;
+}
+
+#container {
+  flex-direction: column;
+  flex: 1;
+}
+
+#header {
+  height: 68px;
+}
+
+#footer {
+  height: 68px;
+}
+
+#section {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-container {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+  }
+
+}
+
+
+.f1 {
+  flex: 1;
+}
+
+.f2 {
+  flex: 2;
+}
+
+.f3 {
+  flex: 3;
+}
+
+.f12 {
+  flex: 12;
+}
+
+@import "~bulma";

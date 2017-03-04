@@ -7,6 +7,7 @@
     "build:dev": "webpack --config ./build/webpack.config.js --watch --progress"
   },
   "dependencies": {
+    "bulma": "^0.3.2",
     "electron": "^1.6.1",
     "kge": "^0.0.2",
     "react": "^15.4.2",
@@ -16,6 +17,10 @@
     "@types/react": "^15.0.14",
     "@types/react-dom": "^0.14.23",
     "awesome-typescript-loader": "^3.0.8",
+    "css-loader": "^0.26.2",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.2",
+    "style-loader": "^0.13.2",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1"
   }
