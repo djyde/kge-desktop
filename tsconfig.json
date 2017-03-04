@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "experimentalDecorators": true,
-    "target": "es6"
+    "target": "es6",
+    "strictNullChecks": true,
+    "jsx": "react"
   },
   "exclude": [
     "node_modules"
