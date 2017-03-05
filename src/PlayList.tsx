@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { observable, action } from 'mobx'
+import { observer } from 'mobx-react'
 
 export interface Song {
   avatar: string,
@@ -8,6 +10,21 @@ export interface Song {
   time: number,
   shareid: string
 }
+
+declare var global
+
+const { getPlayList } = global.require('kge')
+
+export class PlayListStore {
+  @observable songs: Song[] = []
+
+  @action fetchSongs = async (share_uid) => {
+    const playList = (await getPlayList(share_uid)).data.data.ugclist
+    this.songs = playList
+  }
+}
+
+export const playListStore = new PlayListStore()
 
 const PlayItem = ({ song }: { song: Song }) => {
   return (
@@ -20,7 +37,7 @@ const PlayItem = ({ song }: { song: Song }) => {
       <div className='media-content'>
         <div className='content'>
           <div>
-            <strong>{song.time}</strong>
+            <strong>{song.title}</strong>
           </div>
           <div>
             <small>播放次数：{song.play_count}</small>
@@ -31,17 +48,17 @@ const PlayItem = ({ song }: { song: Song }) => {
   )
 }
 
-const PlayList = ({ songs }: { songs: Song[] }) => {
+const PlayList = observer(() => {
   return (
     <div className='columns'>
-      {songs.map(song => (
-        <div className='column is-2'>
+      {playListStore.songs.map(song => (
+        <div key={ song.ksong_mid } className='column is-2'>
           <PlayItem song={song} />
         </div>
 
       ))}
     </div>
   )
-}
+})
 
 export default PlayList

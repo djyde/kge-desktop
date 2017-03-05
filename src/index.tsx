@@ -6,6 +6,8 @@ import './style.scss'
 import Sidebar from './Sidebar'
 import PlayList, { Song } from './PlayList'
 
+import { sidebarStore } from './Sidebar'
+
 const songs: Song[] = [
   {
     avatar: "http://kg.qq.com/gtimg/music/photo/mid_album_300/h/Q/001MFM5e15tRhQ.jpg",
@@ -34,6 +36,7 @@ export const Player = () => {
 }
 
 export const App = () => {
+  sidebarStore.fetchUsers()
   return (
     <div id='container' className='flex-container flex-item one'>
       <div id='header' className='flex-item'>

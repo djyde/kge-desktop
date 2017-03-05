@@ -1203,6 +1203,10 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.npmjs.org/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
+hoist-non-react-statics@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
+
 home-path@^1.0.1:
   version "1.0.3"
   resolved "https://registry.npmjs.org/home-path/-/home-path-1.0.3.tgz#9ece59fec3f032e6d10b5434fee264df4c2de32f"
@@ -1786,6 +1790,16 @@ mkdirp@0.5.0:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+mobx-react@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npmjs.org/mobx-react/-/mobx-react-4.1.1.tgz#98b2625e0ac8f53a5116fef85265d1c987120432"
+  dependencies:
+    hoist-non-react-statics "^1.2.0"
+
+mobx@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/mobx/-/mobx-3.1.2.tgz#5687b45d1ee268b4996cbfb4c8269d3c639f3aa8"
 
 ms@0.7.1:
   version "0.7.1"
