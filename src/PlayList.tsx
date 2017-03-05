@@ -19,7 +19,7 @@ export class PlayListStore {
   @observable songs: Song[] = []
 
   @action fetchSongs = async (share_uid) => {
-    const playList = (await getPlayList(share_uid)).data.data.ugclist
+    const playList = (await getPlayList(share_uid, 1, 10)).data.data.ugclist
     this.songs = playList
   }
 }
@@ -50,12 +50,11 @@ const PlayItem = ({ song }: { song: Song }) => {
 
 const PlayList = observer(() => {
   return (
-    <div className='columns'>
+    <div id='playlist'>
       {playListStore.songs.map(song => (
-        <div key={ song.ksong_mid } className='column is-2'>
+        <div className='playlist-item' key={ song.ksong_mid }>
           <PlayItem song={song} />
         </div>
-
       ))}
     </div>
   )
