@@ -4,19 +4,23 @@ import { render } from 'react-dom'
 import './style.scss'
 
 import Sidebar from './Sidebar'
+import PlayList, { Song } from './PlayList'
+
+const songs: Song[] = [
+  {
+    avatar: "http://kg.qq.com/gtimg/music/photo/mid_album_300/h/Q/001MFM5e15tRhQ.jpg",
+    title: '路过蜻蜓',
+    play_count: 1,
+    shareid: '213',
+    time: 123,
+    ksong_mid: 'sdf'
+  }
+]
 
 export const TitleBar = () => {
   return (
     <div id='titlebar'>
 
-    </div>
-  )
-}
-
-export const PlayList = () => {
-  return (
-    <div>
-      PlayList
     </div>
   )
 }
@@ -40,7 +44,7 @@ export const App = () => {
           <Sidebar />
         </div>
         <div className='f12'>
-          <PlayList/>
+          <PlayList songs={songs}/>
         </div>
       </div>
       <div id='footer' className='flex-item'>
