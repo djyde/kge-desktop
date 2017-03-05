@@ -8,7 +8,8 @@ import { Song } from './PlayList'
 export enum PlayerStatus {
   PLAYING,
   STOPPED,
-  PAUSED
+  PAUSED,
+  LOADING
 }
 
 export interface SongInfo {
@@ -17,16 +18,50 @@ export interface SongInfo {
   singer_name: string,
   song_name: string,
   tail_name: string,
-  ctime: number
+  ctime: number,
+  playurl: string
 }
 
 declare var global
 const { getSongInfo } = global.require('kge')
 
 export class PlayerStore {
+  audioPlayerRef?: HTMLAudioElement
   @observable song?: Song
   @observable status: PlayerStatus = PlayerStatus.STOPPED
   @observable songInfo?: SongInfo
+  @observable playingPosition: number = 0
+  @observable songDuration: number = 0
+
+  @action saveAudioPlayerRef = (ref: HTMLAudioElement) => {
+    this.audioPlayerRef = ref
+
+    ref.addEventListener('play', () => {
+      this.status = PlayerStatus.PLAYING
+
+      if (this.audioPlayerRef) {
+        this.songDuration = this.audioPlayerRef.duration
+      }
+    })
+
+    ref.addEventListener('pause', () => {
+      this.status = PlayerStatus.PAUSED
+    })
+
+    ref.addEventListener('playing', () => {
+      this.status = PlayerStatus.PLAYING
+    })
+
+    ref.addEventListener('timeupdate', e => {
+      this.playingPosition = ref.currentTime
+    })
+  }
+
+  @action changePosition = (e) => {
+    if(this.audioPlayerRef) {
+      this.audioPlayerRef.currentTime = e.target.value
+    }
+  }
 
   @action play = async (song: Song) => {
     this.status = PlayerStatus.PLAYING
@@ -34,6 +69,22 @@ export class PlayerStore {
     this.songInfo = undefined
     const songInfo = (await getSongInfo(song.shareid)).detail
     this.songInfo = songInfo
+  }
+
+  @action audioPlay = () => {
+    if (!this.audioPlayerRef) {
+      return
+    }
+
+    this.audioPlayerRef.play()
+  }
+
+  @action pause = () => {
+    if (!this.audioPlayerRef) {
+      return
+    }
+
+    this.audioPlayerRef.pause()
   }
 }
 
@@ -53,6 +104,9 @@ const Player = observer(() => {
 
   return (
     <div id='player'>
+
+      <audio autoPlay src={songInfo && songInfo.playurl} ref={playerStore.saveAudioPlayerRef} ></audio>
+
       <div id='cover'>
         <article className='media'>
           <figure className='media-left'>
@@ -72,11 +126,19 @@ const Player = observer(() => {
       <div id='controls'>
         <div id='tools'>
           <span>prev</span>
-          <span>play</span>
-          <span>next</span>          
+          <span onClick={playerStore.pause}>play</span>
+          <span>next</span>
         </div>
 
         <div id='progress'>
+          <input
+            type="range"
+            max={playerStore.songDuration}
+            defaultValue='0'
+            onChange={playerStore.changePosition}
+            disabled={songInfo ? false : true}
+            value={playerStore.playingPosition}
+          />
         </div>
       </div>
     </div>
