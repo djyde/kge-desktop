@@ -5,6 +5,7 @@ import './style.scss'
 
 import Sidebar from './Sidebar'
 import PlayList, { Song } from './PlayList'
+import Player from './Player'
 
 import { sidebarStore } from './Sidebar'
 
@@ -12,14 +13,6 @@ export const TitleBar = () => {
   return (
     <div id='titlebar'>
 
-    </div>
-  )
-}
-
-export const Player = () => {
-  return (
-    <div>
-      Player
     </div>
   )
 }
@@ -36,9 +29,7 @@ export const App = () => {
         <PlayList />        
       </div>
       <div id='footer'>
-        <div id='player'>
-          <Player />
-        </div>
+        <Player />
       </div>
     </div>
   )

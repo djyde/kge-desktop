@@ -40,6 +40,27 @@ $primary: #FA564F;
   }
 }
 
+#player {
+  display: flex;
+  flex: 1;
+
+  #cover {
+    flex: 3;
+    padding: .5em;
+  }
+
+  #controls {
+    flex: 12;
+    #tools {
+      display: flex;
+    }
+
+    #progress {
+
+    }
+  }
+}
+
 #footer {
   display: flex;
   height: 68px;

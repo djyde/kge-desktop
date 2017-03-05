@@ -2,6 +2,8 @@ import * as React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 
+import { playerStore } from './Player'
+
 export interface Song {
   avatar: string,
   ksong_mid: string,
@@ -19,7 +21,8 @@ export class PlayListStore {
   @observable songs: Song[] = []
 
   @action fetchSongs = async (share_uid) => {
-    const playList = (await getPlayList(share_uid, 1, 10)).data.data.ugclist
+    const data = (await getPlayList(share_uid, 1, 10)).data.data
+    const playList = data.ugclist
     this.songs = playList
   }
 }
@@ -27,8 +30,13 @@ export class PlayListStore {
 export const playListStore = new PlayListStore()
 
 const PlayItem = ({ song }: { song: Song }) => {
+
+  const play = () => {
+    playerStore.play(song)
+  }
+
   return (
-    <article className='media'>
+    <article onDoubleClick={play} className='media'>
       <figure className='media-left'>
         <p className='image is-48x48'>
           <img src={song.avatar}></img>
@@ -49,6 +57,7 @@ const PlayItem = ({ song }: { song: Song }) => {
 }
 
 const PlayList = observer(() => {
+
   return (
     <div id='playlist'>
       {playListStore.songs.map(song => (
