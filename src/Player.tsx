@@ -126,9 +126,9 @@ const Player = observer(() => {
       </div>
       <div id='controls'>
         <div id='tools'>
-          <span>prev</span>
-          <span onClick={playerStore.pause}>play</span>
-          <span>next</span>
+          <span className='control-btn'></span>
+          {playerStore.status === PlayerStatus.PLAYING ? <span className='control-btn' onClick={playerStore.pause}></span> : <span className='control-btn' onClick={playerStore.audioPlay}></span>}
+          <span className='control-btn'></span>
         </div>
 
         <div id='progress'>
