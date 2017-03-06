@@ -1,4 +1,5 @@
 $primary: #FA564F;
+$grey-light:hsl(0, 0%, 71%);
 
 #app {
   height: 100%;
@@ -60,6 +61,7 @@ $primary: #FA564F;
     #progress {
       display: flex;
       flex: 8;
+      padding-left: 1.5em;
     }
 
     #operations {
@@ -73,6 +75,7 @@ $primary: #FA564F;
   display: flex;
   padding-top: .5em;
   padding-bottom: .5em;
+  border-top: 1px solid $grey-light;
 }
 
 input[type=range] {
