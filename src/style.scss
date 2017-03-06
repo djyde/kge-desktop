@@ -46,24 +46,71 @@ $primary: #FA564F;
 
   #cover {
     flex: 3;
-    padding: .5em;
   }
 
   #controls {
     flex: 12;
+    display: flex;
     #tools {
       display: flex;
+      flex: 2;
     }
 
     #progress {
+      display: flex;
+      flex: 8;
+    }
 
+    #operations {
+      display: flex;
+      flex: 2;
     }
   }
 }
 
 #footer {
   display: flex;
-  height: 68px;
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+
+  background-color: $primary;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;  
+  border-radius: 50%;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: hsl(0, 0%, 86%);
+}
+
+input[type=range]::-webkit-slider-thumb::hover {
+  display: block;
+}
+
+input[type=range]:focus {
+  outline: none; 
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
 }
 
 // #player {

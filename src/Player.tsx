@@ -5,6 +5,8 @@ import { observer } from 'mobx-react'
 
 import { Song } from './PlayList'
 
+import Progressbar from './components/Progressbar'
+
 export enum PlayerStatus {
   PLAYING,
   STOPPED,
@@ -97,7 +99,6 @@ const Player = observer(() => {
   if(!song) {
     return (
       <div>
-        Do have faith with what you are doing.
       </div>
     )
   }
@@ -108,7 +109,7 @@ const Player = observer(() => {
       <audio autoPlay src={songInfo && songInfo.playurl} ref={playerStore.saveAudioPlayerRef} ></audio>
 
       <div id='cover'>
-        <article className='media'>
+        <article className='media' style={{ paddingLeft: '.5em' }}>
           <figure className='media-left'>
             <p className='image is-48x48'>
               <img src={song ? song.avatar : ''} alt="" />
@@ -139,6 +140,10 @@ const Player = observer(() => {
             disabled={songInfo ? false : true}
             value={playerStore.playingPosition}
           />
+        </div>
+
+        <div id='operations'>
+          
         </div>
       </div>
     </div>
