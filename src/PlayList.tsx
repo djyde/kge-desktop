@@ -19,9 +19,19 @@ const { getPlayList } = global.require('kge')
 
 export class PlayListStore {
   @observable songs: Song[] = []
+  @observable currentShareUid?
 
-  @action fetchSongs = async (share_uid) => {
-    const data = (await getPlayList(share_uid, 1, 10)).data.data
+  @action fetchSongsFromSidebar = (share_uid) => {
+    if (this.currentShareUid && (this.currentShareUid === share_uid)) {
+      return
+    }
+
+    this.fetchSongs(share_uid)
+  }
+
+  @action fetchSongs = async (share_uid, page = 1, pageSize = 10) => {
+    const data = (await getPlayList(share_uid, page, pageSize)).data.data
+    this.currentShareUid = share_uid
     const playList = data.ugclist
     this.songs = playList
   }

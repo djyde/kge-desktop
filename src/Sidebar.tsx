@@ -40,7 +40,7 @@ export const sidebarStore = new SidebarStore()
 const UserItem = ({ user }: { user: User }) => {
 
   const clickItem = () => {
-    playListStore.fetchSongs(user.kge_uid)
+    playListStore.fetchSongsFromSidebar(user.kge_uid)
   }
 
   return (
