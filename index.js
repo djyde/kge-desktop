@@ -30,7 +30,11 @@ const URL = url.format({
 function createMainWindow () {
   const win = new electron.BrowserWindow({
     show: false,
-    titleBarStyle: 'hidden-inset'
+    titleBarStyle: 'hidden-inset',
+    width: 1000,
+    height: 640,
+    minWidth: 970,
+    minHeight: 640
   })
 
   win.loadURL(URL)
