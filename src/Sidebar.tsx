@@ -44,31 +44,21 @@ const UserItem = ({ user }: { user: User }) => {
   }
 
   return (
-    <article onClick={clickItem} className='media'>
-      <figure className='media-left'>
-        <p className='image is-48x48'>
-          <img src={user.head_img_url}></img>
-        </p>
-      </figure>
-      <div className='media-content'>
-        <div className='content'>
-          <div>
-            <strong>{user.nickname}</strong>
-          </div>
-          <div>
-            <small>作品：{user.ugc_total_count}</small>
-          </div>
-        </div>
-      </div>
-    </article>
+    <li className='sidebar-item' >
+      {user.nickname}
+    </li>
   )
 }
 
-
 const UserList = observer(({ users }: { users: User[] }) => {
   return (
-    <div className='user-list' style={{ padding: '.5em' }}>
-      {users.map(user => <UserItem key={user.kge_uid} user={user} />)}
+    <div>
+      <section id='following-section'>
+        <h3>following</h3>
+        <ul>
+          {users.map(user => <UserItem key={user.kge_uid} user={user} />)}
+        </ul>
+      </section>
     </div>
   )
 })
