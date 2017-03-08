@@ -205,6 +205,10 @@ input[type=range]::-ms-track {
   border-radius: 50%;
   margin-left: .5em;
   margin-right: .5em;
+
+  &:hover {
+    border: 1px solid #fff;
+  }
 }
 
 // #player {
