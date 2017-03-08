@@ -68,7 +68,7 @@ const PlayItem = ({ song }: { song: Song }) => {
 
   return (
     <div>
-      <div className='cover'>
+      <div onDoubleClick={play} className='cover'>
         <img src={song.avatar} alt=""/>
       </div>
       <div className='info'>
