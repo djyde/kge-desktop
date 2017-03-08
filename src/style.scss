@@ -57,7 +57,11 @@ input, button, textarea, :focus {
 
     ul {
       li {
-        color: rgba(255, 255, 255, .7)
+        color: rgba(255, 255, 255, .7);
+
+        &:hover {
+          color: #fff;
+        }
       }
     }
   }
@@ -73,8 +77,14 @@ input, button, textarea, :focus {
     display: inline-block;
     width: 25%;
     padding: 1em;
+    color: #777;    
+    transition: .2s all;
     // padding-top: .5em;
     // padding-bottom: .5em;
+
+    &:hover {
+      color: #fff !important;
+    }
 
     .cover {
       box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
@@ -88,7 +98,6 @@ input, button, textarea, :focus {
 
       h1 {
         font-size: .8em;
-        color: #777;
         margin-top: .5em;
       }
     }
