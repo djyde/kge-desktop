@@ -3,7 +3,7 @@ import * as React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 
-import { Song } from './PlayList'
+import { Song, playListStore } from './PlayList'
 
 import Progressbar from './components/Progressbar'
 
@@ -56,6 +56,10 @@ export class PlayerStore {
 
     ref.addEventListener('timeupdate', e => {
       this.playingPosition = ref.currentTime
+    })
+
+    ref.addEventListener('ended', () => {
+      playListStore.playNext()
     })
   }
 
@@ -126,9 +130,9 @@ const Player = observer(() => {
       </div>
       <div id='controls'>
         <div id='tools'>
-          <span className='control-btn'></span>
+          <span className='control-btn' onClick={playListStore.playPrev}></span>
           {playerStore.status === PlayerStatus.PLAYING ? <span className='control-btn' onClick={playerStore.pause}></span> : <span className='control-btn' onClick={playerStore.audioPlay}></span>}
-          <span className='control-btn'></span>
+          <span className='control-btn' onClick={playListStore.playNext}></span>
         </div>
 
         <div id='progress'>

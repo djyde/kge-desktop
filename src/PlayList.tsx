@@ -24,6 +24,7 @@ export class PlayListStore {
   @observable currentShareUid?: string
   @observable currentPage: number = 1
   @observable isFetching = false
+  @observable currentSongIndex?: number
 
   @action fetchSongsFromSidebar = (share_uid: string) => {
     if (this.currentShareUid && (this.currentShareUid === share_uid)) {
@@ -31,6 +32,25 @@ export class PlayListStore {
     }
 
     this.fetchSongs(share_uid, 1)
+  }
+
+  @action play = async (song?: Song) => {
+    if (song) {
+      await playerStore.play(song)
+      this.currentSongIndex = this.songs.indexOf(song)
+    }
+  }
+
+  @action playPrev = () => {
+    if ((this.currentSongIndex) && (this.currentSongIndex - 1 > 0)) {
+      this.play(this.songs[this.currentSongIndex - 1])
+    }
+  }
+
+  @action playNext = () => {
+    if ((this.currentSongIndex !== undefined) && (this.currentSongIndex + 1) < this.songs.length) {
+      this.play(this.songs[this.currentSongIndex + 1])
+    }
   }
 
   @action fetchNextPage = () => {
@@ -63,7 +83,7 @@ export const playListStore = new PlayListStore()
 const PlayItem = ({ song }: { song: Song }) => {
 
   const play = () => {
-    playerStore.play(song)
+    playListStore.play(song)
   }
 
   return (
