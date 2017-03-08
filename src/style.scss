@@ -34,6 +34,7 @@ $grey-light:hsl(0, 0%, 71%);
 #sidebar {
   background-color: $black;
   padding: 2em;
+  padding-top: 1em;
   flex: 3;
 
   section {
@@ -53,10 +54,33 @@ $grey-light:hsl(0, 0%, 71%);
 
 #playlist {
   flex: 12;
+  padding: 1em;
+  // display: flex;
+  // flex-wrap: wrap;
   overflow: scroll;
   .playlist-item {
-    padding-top: .5em;
-    padding-bottom: .5em;
+    display: inline-block;
+    width: 25%;
+    padding: 1em;
+    // padding-top: .5em;
+    // padding-bottom: .5em;
+
+    .cover {
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+      img {
+        border: 1px solid #000;
+      }
+    }
+
+    .info {
+      text-align: center;
+
+      h1 {
+        font-size: .8em;
+        color: #777;
+        margin-top: .5em;
+      }
+    }
   }
 }
 

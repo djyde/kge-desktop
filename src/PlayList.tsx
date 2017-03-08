@@ -46,23 +46,14 @@ const PlayItem = ({ song }: { song: Song }) => {
   }
 
   return (
-    <article onDoubleClick={play} className='media'>
-      <figure className='media-left'>
-        <p className='image is-48x48'>
-          <img src={song.avatar}></img>
-        </p>
-      </figure>
-      <div className='media-content'>
-        <div className='content'>
-          <div>
-            <strong>{song.title}</strong>
-          </div>
-          <div>
-            <small>播放次数：{song.play_count}</small>
-          </div>
-        </div>
+    <div>
+      <div className='cover'>
+        <img src={song.avatar} alt=""/>
       </div>
-    </article>
+      <div className='info'>
+        <h1 className='song-title'>{song.title}</h1>
+      </div>
+    </div>
   )
 }
 

@@ -44,7 +44,7 @@ const UserItem = ({ user }: { user: User }) => {
   }
 
   return (
-    <li className='sidebar-item' >
+    <li onClick={clickItem} className='sidebar-item' >
       {user.nickname}
     </li>
   )
