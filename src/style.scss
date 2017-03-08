@@ -2,6 +2,17 @@ $primary: #FA564F;
 $black: #121212;
 $grey-light:hsl(0, 0%, 71%);
 
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+input, button, textarea, :focus {
+    outline: none; // You should add some other style for :focus to help UX/a11y
+}
+
 #app {
   height: 100%;
 }
