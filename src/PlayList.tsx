@@ -30,8 +30,13 @@ export class PlayListStore {
     if (this.currentShareUid && (this.currentShareUid === share_uid)) {
       return
     }
-
+    this.clear()
     this.fetchSongs(share_uid, 1)
+  }
+
+  @action clear = () => {
+    this.songs = []
+    this.currentPage = 1
   }
 
   @action play = async (song?: Song) => {

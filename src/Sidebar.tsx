@@ -4,18 +4,8 @@ import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 
 import { playListStore } from './PlayList'
-
-const users: User[] = [
-  {
-    age: 2,
-    follower: 99,
-    head_img_url: 'http://shp.qlogo.cn/ttsing/118871758/118871758/100?ts=1462079745',
-    level: 0,
-    nickname: 'Randy',
-    ugc_total_count: 75,
-    kge_uid: '639c958d222c308e3c'
-  }
-]
+import AddFollowingModal, { addFollowingModalStore } from './components/AddFollowingModal'
+import { getFollowings } from './store'
 
 export interface User {
   age: number,
@@ -30,8 +20,16 @@ export interface User {
 export class SidebarStore {
   @observable users: User[] = []
 
-  @action fetchUsers = () => {
-    this.users = users
+  @action fetchUsers = async () => {
+    try {
+      const followings = await getFollowings()
+      console.log(followings)
+      this.users = followings
+    } catch (e) {
+      console.error(e)
+    } finally {
+
+    }
   }
 }
 
@@ -54,7 +52,8 @@ const UserList = observer(({ users }: { users: User[] }) => {
   return (
     <div>
       <section id='following-section'>
-        <h3>following</h3>
+        <AddFollowingModal />
+        <h3>following <span onClick={addFollowingModalStore.show}>add</span></h3>
         <ul>
           {users.map(user => <UserItem key={user.kge_uid} user={user} />)}
         </ul>
