@@ -29,10 +29,18 @@ input, button, textarea, :focus {
 
 }
 
+.add-following-btn {
+  display: inline-block;
+  margin-left: 1em;
+  &:hover {
+    color: #fff;
+  }
+}
+
 #titlebar {
   // background: linear-gradient(to bottom, #fff, #E8E8E8);
   background-color: $black;
-  height: 68px;
+  height: 40px;
   display: flex;
   -webkit-app-region: drag;
 }
@@ -59,7 +67,7 @@ input, button, textarea, :focus {
     ul {
       li {
         color: rgba(255, 255, 255, .7);
-
+        margin-bottom: .5em;
         &:hover {
           color: #fff;
         }

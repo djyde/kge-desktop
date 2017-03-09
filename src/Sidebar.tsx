@@ -53,7 +53,7 @@ const UserList = observer(({ users }: { users: User[] }) => {
     <div>
       <section id='following-section'>
         <AddFollowingModal />
-        <h3>following <span onClick={addFollowingModalStore.show}>add</span></h3>
+        <h3>following <span className='add-following-btn' onClick={addFollowingModalStore.show}>add</span></h3>
         <ul>
           {users.map(user => <UserItem key={user.kge_uid} user={user} />)}
         </ul>

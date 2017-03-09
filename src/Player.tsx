@@ -123,7 +123,7 @@ const Player = observer(() => {
           <div className='media-content'>
             <div className='content'>
               <p style={{ marginBottom: '0' }}>{song.title}</p>
-              { songInfo && <small>{`${songInfo.nick} Cover: ${songInfo.singer_name}`}</small> }
+              { songInfo && <small>{`${songInfo.nick}`}</small> }
             </div>
           </div>
         </article>
