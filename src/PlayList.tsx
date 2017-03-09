@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import * as classnames from 'classnames'
 
 import { playerStore } from './Player'
+import { User } from './Sidebar'
 
 export interface Song {
   avatar: string,
@@ -16,22 +17,23 @@ export interface Song {
 
 declare var global
 
-const { getPlayList } = global.require('kge')
+const { getPlayList, getUserInfo } = global.require('kge')
 
 export class PlayListStore {
   @observable songs: Song[] = []
   @observable hasMore: boolean = false
   @observable currentShareUid?: string
   @observable currentPage: number = 1
+  @observable currentUser?: User
   @observable isFetching = false
   @observable currentSongIndex?: number
 
-  @action fetchSongsFromSidebar = (share_uid: string) => {
-    if (this.currentShareUid && (this.currentShareUid === share_uid)) {
+  @action fetchSongsFromSidebar = (user: User) => {
+    if (this.currentUser && (this.currentUser.kge_uid === user.kge_uid)) {
       return
     }
     this.clear()
-    this.fetchSongs(share_uid, 1)
+    this.fetchSongs(user, 1)
   }
 
   @action clear = () => {
@@ -59,17 +61,17 @@ export class PlayListStore {
   }
 
   @action fetchNextPage = () => {
-    if (this.currentShareUid) {
+    if (this.currentUser) {
       const nextPageCount = this.currentPage + 1
-      this.fetchSongs(this.currentShareUid, nextPageCount)
+      this.fetchSongs(this.currentUser, nextPageCount)
     }
   }
 
-  @action fetchSongs = async (share_uid: string, page = this.currentPage, pageSize = 12) => {
+  @action fetchSongs = async (user: User, page = this.currentPage, pageSize = 12) => {
     this.isFetching = true
     try {
-      const data = (await getPlayList(share_uid, page, pageSize)).data.data
-      this.currentShareUid = share_uid
+      const data = (await getPlayList(user.kge_uid, page, pageSize)).data.data
+      this.currentUser = user
       this.hasMore = data.has_more === 1
       const playList = data.ugclist
       this.songs = this.songs.concat(playList)
@@ -105,15 +107,36 @@ const PlayItem = ({ song }: { song: Song }) => {
 
 const PlayList = observer(() => {
 
+  if (!playListStore.currentUser) {
+    return <div>...</div>
+  }
+
   return (
-    <div id='playlist'>
-      {playListStore.songs.map((song, i) => (
-        <div className='playlist-item' key={i}>
-          <PlayItem song={song} />
+    <div style={{ flex: 12, overflow: 'scroll' }}>
+      <div id='profile' style={{ padding: '1em 1em 0 1em' }}>
+        <article className='media'>
+          <figure className='media-left'>
+            <p className='image is-96x96' style={{ padding: '.5em', paddingTop: '0' }}>
+              <img style={{ borderRadius: '100%' }} src={playListStore.currentUser.head_img_url} alt=""/>
+            </p>
+          </figure>
+          <div className='media-content'>
+            <div className='content'>
+              <h1 style={{ color: '#fff', marginBottom: '.2em', fontSize: '2.5em' }}>{playListStore.currentUser.nickname}</h1>
+              <p>粉丝：{playListStore.currentUser.follower} 作品：{playListStore.currentUser.ugc_total_count}</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div id='playlist'>
+        {playListStore.songs.map((song, i) => (
+          <div className='playlist-item' key={i}>
+            <PlayItem song={song} />
+          </div>
+        ))}
+        <div style={{ textAlign: 'center' }}>
+          {playListStore.hasMore ? <button className={classnames('button is-black is-small', { 'is-loading': playListStore.isFetching })} onClick={playListStore.fetchNextPage}>加载更多</button> : <span>没有更多</span>}
         </div>
-      ))}
-      <div style={{ textAlign: 'center' }}>
-        {playListStore.hasMore ? <button className={classnames('button is-black is-small', { 'is-loading': playListStore.isFetching })} onClick={playListStore.fetchNextPage}>加载更多</button> : <span>没有更多</span>}
       </div>
     </div>
   )

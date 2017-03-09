@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import * as classnames from 'classnames'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 
@@ -19,11 +19,11 @@ export interface User {
 
 export class SidebarStore {
   @observable users: User[] = []
+  @observable currentUser?: User
 
   @action fetchUsers = async () => {
     try {
       const followings = await getFollowings()
-      console.log(followings)
       this.users = followings
     } catch (e) {
       console.error(e)
@@ -31,22 +31,27 @@ export class SidebarStore {
 
     }
   }
+
+  @action selectItem = (user: User) => {
+    this.currentUser = user
+  }
 }
 
 export const sidebarStore = new SidebarStore()
 
-const UserItem = ({ user }: { user: User }) => {
+const UserItem = observer(({ user }: { user: User }) => {
 
   const clickItem = () => {
-    playListStore.fetchSongsFromSidebar(user.kge_uid)
+    playListStore.fetchSongsFromSidebar(user)
+    sidebarStore.selectItem(user)
   }
 
   return (
-    <li onClick={clickItem} className='sidebar-item' >
+    <li onClick={clickItem} className={classnames('sidebar-item', {'current-user': sidebarStore.currentUser && sidebarStore.currentUser.kge_uid === user.kge_uid})} >
       {user.nickname}
     </li>
   )
-}
+})
 
 const UserList = observer(({ users }: { users: User[] }) => {
   return (

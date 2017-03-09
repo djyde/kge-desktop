@@ -26,7 +26,7 @@ export const App = () => {
       </div>
       <div id='section'>
         <Sidebar />
-        <PlayList />        
+        <PlayList />
       </div>
       <div id='footer'>
         <Player />

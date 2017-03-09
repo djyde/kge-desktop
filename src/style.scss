@@ -1,6 +1,6 @@
 $black: #121212;
 $grey-light:hsl(0, 0%, 71%);
-
+$red: #F0544A;
 $primary: hsl(0, 0%, 48%);
 
 :not(input):not(textarea),
@@ -71,17 +71,20 @@ input, button, textarea, :focus {
         &:hover {
           color: #fff;
         }
+
+        &.current-user {
+          color: #fff;
+        }
       }
     }
   }
 }
 
 #playlist {
-  flex: 12;
-  padding: 1em;
   // display: flex;
   // flex-wrap: wrap;
   overflow: scroll;
+
   .playlist-item {
     display: inline-block;
     width: 25%;
