@@ -23,17 +23,18 @@ export class AddFollowingModalStore {
   }
 
   @action getUserInfo = async () => {
-    this.isFetching = true
-    try {
-      const user = await getUserInfo(this.shareUid) as User
-      // TODO: add share uid in database
-      await addFollowing(user)
-      sidebarStore.fetchUsers()
-      this.hide()
-    } catch (e) {
-      console.error(e)
-    } finally {
-      this.isFetching = false
+    if (this.shareUid) {
+      this.isFetching = true
+      try {
+        const user = await getUserInfo(this.shareUid) as User
+        await addFollowing(user)
+        sidebarStore.fetchUsers()
+        this.hide()
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.isFetching = false
+      }
     }
   }
 
@@ -48,8 +49,8 @@ const AddFowllowingModal = observer(() => {
   return (
     <div className={classnames('modal', { 'is-active': addFollowingModalStore.visible })}>
       <div className="modal-background"></div>
-      <div className="modal-content">
-        <p className="control has-addons">
+      <div className="modal-content" style={{ textAlign: 'center' }}>
+        <p className="control has-addons" style={{ justifyContent: 'center' }}>
           <input className="input" type="text" placeholder="Search by share_uid" value={addFollowingModalStore.shareUid} onChange={addFollowingModalStore.onChangeShareUidInput} />
           <a className={classnames('button is-primary', { 'is-loading': addFollowingModalStore.isFetching })} onClick={addFollowingModalStore.getUserInfo}>Search</a>
         </p>
