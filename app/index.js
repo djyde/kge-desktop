@@ -1,8 +1,10 @@
 const electron = require('electron')
 const path = require('path')
 const url = require('url')
+const { template } = require('./menu')
+const defaultMenu = require('electron-default-menu')
 
-const app = electron.app
+const { app, Menu, shell } = electron
 
 let mainWindow
 let isQuitting = false
@@ -22,7 +24,7 @@ if (isAlreadyRunning) {
 }
 
 const URL = url.format({
-  pathname: path.resolve(__dirname, './src/index.html'),
+  pathname: path.resolve(__dirname, './index.html'),
   protocol: 'file:',
   slashes: true
 })
@@ -54,6 +56,9 @@ function createMainWindow () {
 }
 
 app.on('ready', () => {
+
+  const menu = defaultMenu(app, shell)
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menu))
 
   mainWindow = createMainWindow()
 

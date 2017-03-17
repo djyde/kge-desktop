@@ -4,7 +4,7 @@ module.exports = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: './lib'
+    path: './app/dist'
   },
   module: {
     rules: [
@@ -28,5 +28,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
-  }
+  },
+  plugins: []
 }

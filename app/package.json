@@ -1,0 +1,17 @@
+{
+  "name": "kge-desktop",
+  "version": "0.0.1",
+  "productName": "K歌",
+  "description": "全民k歌 for Desktop",
+  "author": {
+    "name": "Randy",
+    "email": "randypriv@gmail.com"
+  },
+  "homepage": "https://github.com/djyde/kge-desktop",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "electron-default-menu": "^1.0.0",
+    "kge": "^0.0.4"
+  }
+}
