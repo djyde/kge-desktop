@@ -1,11 +1,11 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
-import { observable, action } from 'mobx'
+import { observable, action, toJS } from 'mobx'
 import { observer } from 'mobx-react'
 
 import { playListStore } from './PlayList'
 import AddFollowingModal, { addFollowingModalStore } from './components/AddFollowingModal'
-import { getFollowings } from './store'
+import { getFollowings, removeFollowing } from './store'
 
 export interface User {
   age: number,
@@ -46,8 +46,13 @@ const UserItem = observer(({ user }: { user: User }) => {
     sidebarStore.selectItem(user)
   }
 
+  const doubleClickItem = async () => {
+    await removeFollowing(toJS(user))
+    await sidebarStore.fetchUsers()
+  }
+
   return (
-    <li onClick={clickItem} className={classnames('sidebar-item', {'current-user': sidebarStore.currentUser && sidebarStore.currentUser.kge_uid === user.kge_uid})} >
+    <li onClick={clickItem} onDoubleClick={doubleClickItem} className={classnames('sidebar-item', {'current-user': sidebarStore.currentUser && sidebarStore.currentUser.kge_uid === user.kge_uid})} >
       {user.nickname}
     </li>
   )

@@ -15,6 +15,7 @@ export const addFollowing = (user: User) => {
   })
 }
 
-export const removeFollowing = (shareUid: string) => {
+export const removeFollowing = (shareUid: User) => {
+  console.log(shareUid)
   return db.remove(shareUid)
 }
