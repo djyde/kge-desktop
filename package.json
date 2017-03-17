@@ -4,20 +4,21 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "build:dev": "webpack --config ./build/webpack.config.js --watch --progress"
+    "build:dev": "webpack --config ./build/webpack.config.js --watch --progress",
+    "build:prod": "webpack --config ./build/webpack.config.js -p"
   },
   "dependencies": {
+    "kge": "^0.0.4"
+  },
+  "devDependencies": {
     "bulma": "^0.3.2",
     "classnames": "^2.2.5",
     "electron": "^1.6.1",
-    "kge": "^0.0.4",
     "mobx": "^3.1.2",
     "mobx-react": "^4.1.1",
     "pouchdb": "^6.1.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
-  },
-  "devDependencies": {
+    "react-dom": "^15.4.2",
     "@types/react": "^15.0.14",
     "@types/react-dom": "^0.14.23",
     "awesome-typescript-loader": "^3.0.8",
