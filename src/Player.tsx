@@ -3,7 +3,7 @@ import * as React from 'react'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
 
-import { Song, playListStore } from './PlayList'
+import { playListStore } from './PlayList'
 
 import Progressbar from './components/Progressbar'
 
@@ -14,24 +14,13 @@ export enum PlayerStatus {
   LOADING
 }
 
-export interface SongInfo {
-  content: string,
-  nick: string,
-  singer_name: string,
-  song_name: string,
-  tail_name: string,
-  ctime: number,
-  playurl: string
-}
-
-declare var global
 const { getSongInfo } = global.require('kge')
 
 export class PlayerStore {
   audioPlayerRef?: HTMLAudioElement
-  @observable song?: Song
+  @observable song?: Kge.Song
   @observable status: PlayerStatus = PlayerStatus.STOPPED
-  @observable songInfo?: SongInfo
+  @observable songInfo?: Kge.SongInfo
   @observable playingPosition: number = 0
   @observable songDuration: number = 0
 
@@ -69,7 +58,7 @@ export class PlayerStore {
     }
   }
 
-  @action play = async (song: Song) => {
+  @action play = async (song: Kge.Song) => {
     this.status = PlayerStatus.PLAYING
     this.song = song
     this.songInfo = undefined

@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 import './style.scss'
 
 import Sidebar from './Sidebar'
-import PlayList, { Song } from './PlayList'
+import PlayList from './PlayList'
 import Player from './Player'
 
 import { sidebarStore } from './Sidebar'

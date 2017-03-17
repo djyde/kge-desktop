@@ -4,31 +4,19 @@ import { observer } from 'mobx-react'
 import * as classnames from 'classnames'
 
 import { playerStore } from './Player'
-import { User } from './Sidebar'
-
-export interface Song {
-  avatar: string,
-  ksong_mid: string,
-  title: string,
-  play_count: number,
-  time: number,
-  shareid: string
-}
-
-declare var global
 
 const { getPlayList, getUserInfo } = global.require('kge')
 
 export class PlayListStore {
-  @observable songs: Song[] = []
+  @observable songs: Kge.Song[] = []
   @observable hasMore: boolean = false
   @observable currentShareUid?: string
   @observable currentPage: number = 1
-  @observable currentUser?: User
+  @observable currentUser?: Kge.User
   @observable isFetching = false
   @observable currentSongIndex?: number
 
-  @action fetchSongsFromSidebar = (user: User) => {
+  @action fetchSongsFromSidebar = (user: Kge.User) => {
     if (this.currentUser && (this.currentUser.kge_uid === user.kge_uid)) {
       return
     }
@@ -41,7 +29,7 @@ export class PlayListStore {
     this.currentPage = 1
   }
 
-  @action play = async (song?: Song) => {
+  @action play = async (song?: Kge.Song) => {
     if (song) {
       await playerStore.play(song)
       this.currentSongIndex = this.songs.indexOf(song)
@@ -67,7 +55,7 @@ export class PlayListStore {
     }
   }
 
-  @action fetchSongs = async (user: User, page = this.currentPage, pageSize = 12) => {
+  @action fetchSongs = async (user: Kge.User, page = this.currentPage, pageSize = 12) => {
     this.isFetching = true
     try {
       const data = (await getPlayList(user.kge_uid, page, pageSize)).data.data
@@ -87,7 +75,7 @@ export class PlayListStore {
 
 export const playListStore = new PlayListStore()
 
-const PlayItem = ({ song }: { song: Song }) => {
+const PlayItem = ({ song }: { song: Kge.Song }) => {
 
   const play = () => {
     playListStore.play(song)

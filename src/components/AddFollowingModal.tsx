@@ -6,7 +6,7 @@ import * as classnames from 'classnames'
 declare var global
 
 const { getUserInfo } = global.require('kge')
-import { User, sidebarStore } from '../Sidebar'
+import { sidebarStore } from '../Sidebar'
 import { addFollowing } from '../store'
 
 export class AddFollowingModalStore {
@@ -26,7 +26,7 @@ export class AddFollowingModalStore {
     if (this.shareUid) {
       this.isFetching = true
       try {
-        const user = await getUserInfo(this.shareUid) as User
+        const user = await getUserInfo(this.shareUid) as Kge.User
         await addFollowing(user)
         sidebarStore.fetchUsers()
         this.hide()

@@ -7,19 +7,10 @@ import { playListStore } from './PlayList'
 import AddFollowingModal, { addFollowingModalStore } from './components/AddFollowingModal'
 import { getFollowings, removeFollowing } from './store'
 
-export interface User {
-  age: number,
-  follower: number,
-  head_img_url: string,
-  level: number,
-  nickname: string,
-  kge_uid: string,
-  ugc_total_count: number
-}
 
 export class SidebarStore {
-  @observable users: User[] = []
-  @observable currentUser?: User
+  @observable users: Kge.User[] = []
+  @observable currentUser?: Kge.User
 
   @action fetchUsers = async () => {
     try {
@@ -32,14 +23,14 @@ export class SidebarStore {
     }
   }
 
-  @action selectItem = (user: User) => {
+  @action selectItem = (user: Kge.User) => {
     this.currentUser = user
   }
 }
 
 export const sidebarStore = new SidebarStore()
 
-const UserItem = observer(({ user }: { user: User }) => {
+const UserItem = observer(({ user }: { user: Kge.User }) => {
 
   const clickItem = () => {
     playListStore.fetchSongsFromSidebar(user)
@@ -58,7 +49,7 @@ const UserItem = observer(({ user }: { user: User }) => {
   )
 })
 
-const UserList = observer(({ users }: { users: User[] }) => {
+const UserList = observer(({ users }: { users: Kge.User[] }) => {
   return (
     <div>
       <section id='following-section'>
