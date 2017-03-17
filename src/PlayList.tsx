@@ -108,7 +108,15 @@ const PlayItem = ({ song }: { song: Song }) => {
 const PlayList = observer(() => {
 
   if (!playListStore.currentUser) {
-    return <div>...</div>
+    return (
+      <div style={{ flex: 12, overflow: 'scroll' }}>
+        <div className='columns'>
+          <div className='column'>
+            
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
