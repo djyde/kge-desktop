@@ -16,7 +16,9 @@ Download in [release](https://github.com/djyde/kge-desktop/releases)
 
 ## Feature
 
-- Use share_id to follow
+- Use share_uid to follow
+
+![share_uid](https://ws2.sinaimg.cn/large/62580dd9gy1fdz7knet4sj20tg02ujru.jpg)
 
 ## Build
 
