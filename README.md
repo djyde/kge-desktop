@@ -30,7 +30,7 @@ npm start # run the application
 
 ## TODO
 
-- [ ] Enhance playlist logic
+- [x] Enhance playlist logic
 - [ ] Logo
 - [ ] Auto update
 - [ ] Play offline

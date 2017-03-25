@@ -14,7 +14,6 @@ export class PlayListStore {
   @observable currentPage: number = 1
   @observable currentUser?: Kge.User
   @observable isFetching = false
-  @observable currentSongIndex?: number
 
   @action fetchSongsFromSidebar = (user: Kge.User) => {
     if (this.currentUser && (this.currentUser.kge_uid === user.kge_uid)) {
@@ -31,20 +30,7 @@ export class PlayListStore {
 
   @action play = async (song?: Kge.Song) => {
     if (song) {
-      await playerStore.play(song)
-      this.currentSongIndex = this.songs.indexOf(song)
-    }
-  }
-
-  @action playPrev = () => {
-    if ((this.currentSongIndex) && (this.currentSongIndex - 1 > 0)) {
-      this.play(this.songs[this.currentSongIndex - 1])
-    }
-  }
-
-  @action playNext = () => {
-    if ((this.currentSongIndex !== undefined) && (this.currentSongIndex + 1) < this.songs.length) {
-      this.play(this.songs[this.currentSongIndex + 1])
+      await playerStore.play(song, this.songs)
     }
   }
 
