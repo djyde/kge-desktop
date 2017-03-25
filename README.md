@@ -1,5 +1,8 @@
 # kge-desktop
 
+[![GitHub release](https://img.shields.io/github/release/djyde/kge-desktop.svg)](https://github.com/djyde/kge-desktop/releases)
+[![Github All Releases](https://img.shields.io/github/downloads/djyde/kge-desktop/total.svg)](https://github.com/djyde/kge-desktop)
+
 全民k歌 for Desktop
 
 ![](https://cloud.githubusercontent.com/assets/914329/24034646/1f92b658-0b2d-11e7-8dd5-2803b36fe3cf.png)
