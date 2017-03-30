@@ -21,7 +21,13 @@ Download in [release](https://github.com/djyde/kge-desktop/releases)
 
 - Use share_uid to follow
 
+You could use `639c958d222c308e3c` for experience.
+
 ![share_uid](https://ws2.sinaimg.cn/large/62580dd9gy1fdz7knet4sj20tg02ujru.jpg)
+
+## Operations
+
+- Double click album cover to play.
 
 ## Build
 
