@@ -28,6 +28,7 @@ You could use `639c958d222c308e3c` for experience.
 ## Operations
 
 - Double click album cover to play.
+- Double click user name for removing a following user.
 
 ## Build
 
