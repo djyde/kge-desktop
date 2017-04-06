@@ -1,55 +1,31 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
-import { observable, action, toJS } from 'mobx'
-import { observer } from 'mobx-react'
+import { toJS } from 'mobx'
+import { inject } from 'cans'
 
-import { playListStore } from './PlayList'
 import AddFollowingModal, { addFollowingModalStore } from './components/AddFollowingModal'
 import { getFollowings, removeFollowing } from './store'
 
-
-export class SidebarStore {
-  @observable users: Kge.User[] = []
-  @observable currentUser?: Kge.User
-
-  @action fetchUsers = async () => {
-    try {
-      const followings = await getFollowings()
-      this.users = followings
-    } catch (e) {
-      console.error(e)
-    } finally {
-
-    }
-  }
-
-  @action selectItem = (user: Kge.User) => {
-    this.currentUser = user
-  }
-}
-
-export const sidebarStore = new SidebarStore()
-
-const UserItem = observer(({ user }: { user: Kge.User }) => {
+const UserItem = inject(({ models, user }: { models: any, user: Kge.User }) => {
 
   const clickItem = () => {
-    playListStore.fetchSongsFromSidebar(user)
-    sidebarStore.selectItem(user)
+    models.playlist.fetchSongsFromSidebar(user)
+    models.sidebar.selectItem(user)
   }
 
   const doubleClickItem = async () => {
     await removeFollowing(toJS(user))
-    await sidebarStore.fetchUsers()
+    await models.sidebarStore.fetchUsers()
   }
 
   return (
-    <li onClick={clickItem} onDoubleClick={doubleClickItem} className={classnames('sidebar-item', {'current-user': sidebarStore.currentUser && sidebarStore.currentUser.kge_uid === user.kge_uid})} >
+    <li onClick={clickItem} onDoubleClick={doubleClickItem} className={classnames('sidebar-item', {'current-user': models.sidebar.currentUser && models.sidebar.currentUser.kge_uid === user.kge_uid})} >
       {user.nickname}
     </li>
   )
 })
 
-const UserList = observer(({ users }: { users: Kge.User[] }) => {
+const UserList = inject(({ models, users }: { models: any, users: Kge.User[] }) => {
   return (
     <div>
       <section id='following-section'>
@@ -63,10 +39,10 @@ const UserList = observer(({ users }: { users: Kge.User[] }) => {
   )
 })
 
-const Sidebar = observer(() => {
+const Sidebar = inject(({ models }) => {
   return (
     <div id='sidebar'>
-      <UserList users={sidebarStore.users}/>
+      <UserList users={models.sidebar.users}/>
     </div>
   )
 })

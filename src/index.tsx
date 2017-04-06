@@ -1,40 +1,20 @@
 import * as React from 'react'
-import { render } from 'react-dom'
+import cans from 'cans'
 
 import './style.scss'
 
-import Sidebar from './Sidebar'
-import PlayList from './PlayList'
-import Player from './Player'
+import App from './App'
 
-import { sidebarStore } from './Sidebar'
+import sidebarModel from './models/sidebar'
 
-export const TitleBar = () => {
-  return (
-    <div id='titlebar'>
+const app = cans()
 
-    </div>
-  )
-}
+app.model(sidebarModel)
 
-export const App = () => {
-  sidebarStore.fetchUsers()
-  return (
-    <div id='app-container'>
-      <div id='header'>
-        <TitleBar />
-      </div>
-      <div id='section'>
-        <Sidebar />
-        <PlayList />
-      </div>
-      <div id='footer'>
-        <Player />
-      </div>
-    </div>
-  )
-}
-
-render((
+const route = () => (
   <App />
-), document.querySelector('#app'))
+)
+
+app.route(route)
+
+app.start(document.querySelector('#app'))
